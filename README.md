@@ -22,15 +22,15 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 
 ## Description
 
-
+Students are tasked with creating a note taker that can store notes to a local back-end database called db.json.
 
 ## Installation
 
-
+Run npm i to install all appropriate node packages (namely, express).
 
 ## Usage
 
-
+Users can use the note-taker application to save notes. The notes are stored so they can be looked at later or even deleted upon completion!
 
 ## Credits
 
