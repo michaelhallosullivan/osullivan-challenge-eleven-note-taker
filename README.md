@@ -34,9 +34,11 @@ Users can use the note-taker application to save notes. The notes are stored so 
 
 ## Credits
 
-Starter code provided by UCB extension from github repository miniature-eureka (https://github.com/coding-boot-camp/miniature-eureka). All additional code written by Michael O'Sullivan.
+Starter code provided by UCB extension from github repository miniature-eureka (https://github.com/coding-boot-camp/miniature-eureka). Node.js and node package express.js (https://expressjs.com/) used. All additional code written by Michael O'Sullivan.
 
 
 ## License
 
 MIT License
+
+![Model](https://github.com/michaelhallosullivan/osullivan-challenge-eleven-note-taker/blob/main/public/assets/images/note-taker.jpg)
