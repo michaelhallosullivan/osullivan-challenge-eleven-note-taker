@@ -7,6 +7,7 @@ const app = express();
 const notes = require('./db/db.json');
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
@@ -15,11 +16,10 @@ app.get('/', (req,res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
-app.get('/notes', (req,res)=>
+app.get('/notes', (req,res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-//read the db.json file and return all saved notes as JSON.
 app.get('/api/notes', (req, res) => {
   fs.readFile('./db/db.json', function(err, data) {
     if (err) {
@@ -31,10 +31,6 @@ app.get('/api/notes', (req, res) => {
   });
 });
 
-//receive a new note to save on the request body
-//add it to the db.json file
-//then return the new note to the client
-//give each note a unique id when it's saved (uuid)
 app.post('/api/notes', (req, res) => {
     res.json(`${req.method} request received`);
     console.info(`${req.method} request received`);
@@ -42,7 +38,7 @@ app.post('/api/notes', (req, res) => {
     let newNote = {
       title,
       text,
-      note_id: uuid(),
+      id: uuid(),
     };
     fs.readFile('./db/db.json', function(err, data) {
       if (err) {
@@ -59,6 +55,30 @@ app.post('/api/notes', (req, res) => {
     });
     console.log(newNote);
 });
+
+app.delete('/api/notes/:id', (req, res) => {
+    res.json(`${req.method} request received`);
+    console.info(`${req.method} request received`);
+    fs.readFile('./db/db.json', function(err, data) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        let arrayOfNotes = JSON.parse(data);
+        var idToRemove = req.params.id;
+        arrayOfNotes = arrayOfNotes.filter(item => {
+          if(idToRemove !== item.id) {
+              return item
+          }
+        });
+        const notesString = JSON.stringify(arrayOfNotes);
+        fs.writeFile('./db/db.json', notesString, (err) =>
+        err ? console.error(err) : console.log("Note removed from db.json")
+        );
+      };
+    });
+});
+
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
