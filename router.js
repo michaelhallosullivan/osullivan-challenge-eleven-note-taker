@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const uuid = require('./uuid.js');
+const uuid = require('./public/assets/js/uuid.js');
 const fs = require("fs");
-const notes = require('../../../db/db.json');
 
 router.get('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', function(err, data) {
@@ -10,7 +9,8 @@ router.get('/api/notes', (req, res) => {
         console.log(err);
       }
       else {
-        res.json(notes);
+        let notes = JSON.parse(data);
+        return res.json(notes);
       };
     });
 });

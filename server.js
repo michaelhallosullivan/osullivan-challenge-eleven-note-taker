@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const PORT = 3001;
 const app = express();
-const router = require('./public/assets/js/router.js');
+const router = require('./router.js');
 
 app.use(express.json());
 
